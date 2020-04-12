@@ -24,3 +24,16 @@
 {"message":"Unauthorized request to path: /","level":"error"}
 {"message":"Unauthorized request to path: /","level":"error"}
 {"message":"Unauthorized request to path: /","level":"error"}
+{"message":"Unauthorized request to path: /","level":"error"}
+{"message":"Bookmark with id 2 not found","level":"error"}
+{"message":"Bookmark with id 2 not found","level":"error"}
+{"message":"title, url, or description invalid","level":"error"}
+{"message":"Card with id 217d46d2-53f3-4045-9065-1fcf2ad0f040 created","level":"info"}
+{"message":"Card with id de8cd4e2-adbd-4331-a568-b9590d0f4d75 created","level":"info"}
+{"message":"Bookmark with id cjkzyzeqh0001lxygb8mhqvh3 deleted.","level":"info"}
+{"message":"Unauthorized request to path: /bookmarks/cjkzyzeqh0001lxygb8mhqvh3","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks/cjkzyzeqh0001lxygb8mhqvh3","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Invalid rating of 5","level":"error"}
+{"message":"Card with id 9eba8c2b-be90-42b9-85a7-d11df8cf6343 created","level":"info"}
+{"message":"Bookmark with id 9eba8c2b-be90-42b9-85a7-d11df8cf6343 deleted.","level":"info"}
