@@ -81,11 +81,11 @@ bookmarksRouter
 
 bookmarksRouter
 .route('/bookmarks/:id')
-.post((req,res) => {
+.get((req,res) => {
     // Write a route handler for the endpoint GET /bookmarks/:id that returns a single bookmark with the given ID, return 404 Not Found if the ID is not valid
-    console.log(req.params.id)
+
     const id = req.params.id;
-    
+    logger.info(`${id}`)
     const website = bookmarks.find(bookmarked => bookmarked.id === id)
     console.log(website)
     console.log(id)

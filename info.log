@@ -37,3 +37,7 @@
 {"message":"Invalid rating of 5","level":"error"}
 {"message":"Card with id 9eba8c2b-be90-42b9-85a7-d11df8cf6343 created","level":"info"}
 {"message":"Bookmark with id 9eba8c2b-be90-42b9-85a7-d11df8cf6343 deleted.","level":"info"}
+{"message":"cjozyzeqh0001lxygb8mhnvhz","level":"info"}
+{"message":"cjozyzeqh0001lxygb8mhnvhz","level":"info"}
+{"message":"[object Object]","level":"info"}
+{"message":"Bookmark with id [object Object] not found","level":"error"}
