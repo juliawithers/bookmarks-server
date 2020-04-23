@@ -1,25 +1,26 @@
 const express = require('express')
 const uuid = require('uuid/v4')
 const logger = require('../logger')
-const store = require('../store')
 const { isWebUri } = require('valid-url')
 const bookmarksRouter = express.Router()
+const BookmarksService = require('./bookmarks-service')
 
-const bookmarks = store.bookmarks;
 const bodyParser = express.json();
 
 bookmarksRouter
 .route('/bookmarks')
-.get((req,res) => {
+.get((req,res,next) => {
     // Write a route handler for the endpoint GET /bookmarks that returns a list of bookmarks
-    res
-    .json(bookmarks)
+    const knexInstance = req.app.get('db')
+    BookmarksService.getAllBookmarks(knexInstance)
+        .then(bookmarks => {
+            res.json(bookmarks)
+        })
+        .catch(next)
 })
 .post(bodyParser,(req,res) => {
     // Write a route handler for POST /bookmarks that accepts a JSON object representing a bookmark and adds it to the list of bookmarks after validation.
-
-    // need to add rating to this apparently? why would you require a user to do this???!
-
+    
     const { title, url, description, rating } = req.body;
 
     if (!title || !url || !rating) {
@@ -81,24 +82,22 @@ bookmarksRouter
 
 bookmarksRouter
 .route('/bookmarks/:id')
-.get((req,res) => {
+.get((req,res,next) => {
     // Write a route handler for the endpoint GET /bookmarks/:id that returns a single bookmark with the given ID, return 404 Not Found if the ID is not valid
-
+    const knexInstance = req.app.get('db')
     const id = req.params.id;
-    logger.info(`${id}`)
-    const website = bookmarks.find(bookmarked => bookmarked.id === id)
-    console.log(website)
-    console.log(id)
-
-    res.json(website)
-    if (!website) {
-        logger.error(`Bookmark with id ${id} not found`)
-        return res
-                .status(404)
-                .send('404 Not Found')
-    } 
-    
-    res.json(website)    
+    console.log(req.params.id)
+    BookmarksService.getById(knexInstance, id)
+        .then(bookmark => {
+            if (!bookmark) {
+                logger.error(`Bookmark with id ${id} not found`)
+                return res.status(404).json({
+                    error: { message: `Bookmark does not exist`}
+                })
+            }
+            res.json(bookmark)
+        })
+        .catch(next)  
 })
 .delete((req,res) => {
     // Write a route handler for the endpoint DELETE /bookmarks/:id that deletes the bookmark with the given ID.
