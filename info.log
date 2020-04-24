@@ -624,3 +624,54 @@
 {"message":"Invalid url htps//www.newurl.com","level":"error"}
 {"message":"Invalid rating of invalid","level":"error"}
 {"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id undefined was deleted","level":"error"}
+{"message":"Bookmark with id undefined not found","level":"error"}

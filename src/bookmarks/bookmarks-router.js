@@ -90,7 +90,6 @@ bookmarksRouter
 bookmarksRouter
 .route('/bookmarks/:id')
 .get((req,res,next) => {
-    // Write a route handler for the endpoint GET /bookmarks/:id that returns a single bookmark with the given ID, return 404 Not Found if the ID is not valid
     const knexInstance = req.app.get('db')
     const id = req.params.id;
     console.log(req.params.id)
@@ -113,20 +112,19 @@ bookmarksRouter
         .catch(next)  
 })
 .delete((req,res,next) => {
-    // Write a route handler for the endpoint DELETE /bookmarks/:id that deletes the bookmark with the given ID.
 
     BookmarksService.deleteBookmark(
         req.app.get('db'),
         req.params.id
     )
-        .then(res => {
-            if (!res) {
-                res.status(404).json({
+        .then(bookmark => {
+            if (!bookmark) {
+                logger.error(`Bookmark with id ${bookmark.id} not found`)
+                return res.status(404).json({
                     error: { message: `Bookmark does not exist`}
                 })
             }
-        })
-        .then(()=>{
+            logger.error(`Bookmark with id ${bookmark.id} was deleted`)
             res.status(204).end();
         })
         .catch(next)

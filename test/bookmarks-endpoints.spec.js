@@ -233,13 +233,24 @@ describe.only('Bookmarks Endpoints', function() {
                     .then(res =>{
                         supertest(app)
                             .get(`/bookmarks`)
+                            .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
                             .expect(expectedBookmarks)
                     })
             })
         })
+        
         context(`Given no bookmarks`, () =>{
-
+            it('responds with 404 not found if the bookmark does not exist', ()=>{
+                const idToRemove = 123456
+                return supertest(app)
+                    .delete(`/bookmarks/${idToRemove}`)
+                    .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
+                    .expect(404,{error: { message: `Bookmark does not exist`}
+                    })
+            })
         })
+
+        
     })
     
 })
