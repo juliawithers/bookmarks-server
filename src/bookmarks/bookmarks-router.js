@@ -4,8 +4,19 @@ const logger = require('../logger')
 const { isWebUri } = require('valid-url')
 const bookmarksRouter = express.Router()
 const BookmarksService = require('./bookmarks-service')
+const xss = require('xss')
 
 const bodyParser = express.json();
+// Requirements
+
+
+// You should also test that your POST /bookmarks endpoint validates each bookmark to have the required fields in valid formats. For example, rating should be a number between 1 and 5.
+
+
+// Refactor or implement the integration tests for DELETEing bookmarks as well as making sure the DELETE responds with a 404 when the bookmark doesn't exist.
+// Refactor your GET methods and tests to ensure that all bookmarks get sanitized.
+// This assignment should take about 3 hours to complete. If you're having trouble, attend a Q&A session or reach out on Slack for help.
+
 
 bookmarksRouter
 .route('/bookmarks')
@@ -14,70 +25,66 @@ bookmarksRouter
     const knexInstance = req.app.get('db')
     BookmarksService.getAllBookmarks(knexInstance)
         .then(bookmarks => {
-            res.json(bookmarks)
+            res.json(bookmarks.map(bookmark => ({
+                id: bookmark.id,
+                title: xss(bookmark.title),
+                url: bookmark.url,
+                description: xss(bookmark.description),
+                rating: bookmark.rating
+            }) 
+            ))
         })
         .catch(next)
 })
-.post(bodyParser,(req,res) => {
-    // Write a route handler for POST /bookmarks that accepts a JSON object representing a bookmark and adds it to the list of bookmarks after validation.
-    
+.post(bodyParser,(req, res, next) => {
     const { title, url, description, rating } = req.body;
 
-    if (!title || !url || !rating) {
-        logger.error(`title, url, or rating not supplied`)
-        return res 
-            .status(400)
-            .send('You must enter all of the following information: title, url, and rating. Description is optional')
-    }
+    const newBookmark = { title, url, description, rating }
 
-     if (title) {
-        const duplicate = bookmarks.find(bookmarked => bookmarked.title === title)
-        if (duplicate) {
-            return res
-                .status(400)
-                .send('This title is already in use as a bokmark')
+    for (const field of ['title','url', 'rating']) {
+        if (!req.body[field]) {
+            logger.error(`${field} is required`)
+            return res.status(400).send({
+                error: { message: `Missing '${field}' in request body` }
+            })
         }
     }
 
-    // did not know about isWebUri before looking at the solution, good to know
     if (!isWebUri(url)) {
         logger.error(`Invalid url ${url}`)
         return res
-            .status(400)
-            .send('Please enter a valid url')
-    }
-
-    if (url) {
-        const duplicate = bookmarks.find(bookmarked => bookmarked.url === url)
-        if (duplicate) {
-            return res
-                .status(400)
-                .send('This url is already in use as a bokmark')
-        }
+            .status(400).json({
+                error: { message: `'url' must be valid` }
+            })
+            
     }
 
    if (!Number.isInteger(rating) || rating < 0 || rating > 5) {
        logger.error(`Invalid rating of ${rating}`)
        return res
-            .status(400)
-            .send('You must enter a rating between 0 and 5')
+            .status(400).json({
+                error: { message: `'rating' must be a number between 0 and 5` }
+            })
    }
 
-    const id = uuid();
-    const bookmark = {
-        id,
-        title,
-        url,
-        description
-    }
-
-    bookmarks.push(bookmark);
-
-    logger.info(`Card with id ${id} created`)
-    res
-        .status(201)
-        .location(`http://localhost:8000/${id}`)
-        .json(bookmark)
+    BookmarksService.insertBookmark(
+        req.app.get('db'),
+        newBookmark
+    )
+        .then(bookmark => {
+            logger.info(`Bookmark with id ${bookmark.id} created`)
+            res
+                .status(201)
+                .location(`/bookmarks/${bookmark.id}`)
+                .json({
+                    id: bookmark.id,
+                    title: xss(bookmark.title),
+                    url: bookmark.url,
+                    description: xss(bookmark.description),
+                    rating: bookmark.rating
+                })
+        })
+        .catch(next)
 })
 
 bookmarksRouter
@@ -95,29 +102,34 @@ bookmarksRouter
                     error: { message: `Bookmark does not exist`}
                 })
             }
-            res.json(bookmark)
+            res.json({
+                id: bookmark.id,
+                title: xss(bookmark.title),
+                url: bookmark.url,
+                description: xss(bookmark.description),
+                rating: bookmark.rating
+            })
         })
         .catch(next)  
 })
-.delete((req,res) => {
+.delete((req,res,next) => {
     // Write a route handler for the endpoint DELETE /bookmarks/:id that deletes the bookmark with the given ID.
-    const id = req.params.id;
 
-    const bookmarkInd = bookmarks.findIndex(bookmarked => bookmarked.id == id)
-
-    if (bookmarkInd === -1) {
-        logger.error(`Bookmark with id ${id} does not exist`)
-        return res 
-            .status(404)
-            .send('Not Found')
-    }
-
-    bookmarks.splice(bookmarkInd,1)
-    logger.info(`Bookmark with id ${id} deleted.`)
-    res
-        .status(204)
-        .end();
-
+    BookmarksService.deleteBookmark(
+        req.app.get('db'),
+        req.params.id
+    )
+        .then(res => {
+            if (!res) {
+                res.status(404).json({
+                    error: { message: `Bookmark does not exist`}
+                })
+            }
+        })
+        .then(()=>{
+            res.status(204).end();
+        })
+        .catch(next)
 })
 
 module.exports = bookmarksRouter
