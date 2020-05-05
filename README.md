@@ -24,3 +24,18 @@ Run the tests `npm test`
 ## Deploying
 
 When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+
+
+
+Bookmarks API assignment: 
+
+1) Add an endpoint to support updating bookmarks using a PATCH request
+2) Ensure the Bookmarks API has a uniform RESTful interface. For example, are the endpoints consistently named?
+3) Update all of the endpoints to use the /api prefix
+Write integration tests for your PATCH request to ensure:
+    It requires the bookmark's ID to be supplied as a URL param
+    It responds with a 204 and no content when successful
+    It updates the bookmark in your database table
+    It responds with a 400 when no values are supplied for any fields (title, url, description, rating)
+    It allows partial updates, for example, only supplying a new title will only update the title for that item
+4) Write the appropriate API code to make these tests pass

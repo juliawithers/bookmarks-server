@@ -18,7 +18,7 @@ app.use(helmet())
 
 app.use(validateBearerToken)
 
-app.use(bookmarksRouter)
+app.use('/api',bookmarksRouter)
 
 app.get('/', (req,res) => {
     res.send('Hello')

@@ -5,18 +5,9 @@ const { isWebUri } = require('valid-url')
 const bookmarksRouter = express.Router()
 const BookmarksService = require('./bookmarks-service')
 const xss = require('xss')
+const path = require('path')
 
 const bodyParser = express.json();
-// Requirements
-
-
-// You should also test that your POST /bookmarks endpoint validates each bookmark to have the required fields in valid formats. For example, rating should be a number between 1 and 5.
-
-
-// Refactor or implement the integration tests for DELETEing bookmarks as well as making sure the DELETE responds with a 404 when the bookmark doesn't exist.
-// Refactor your GET methods and tests to ensure that all bookmarks get sanitized.
-// This assignment should take about 3 hours to complete. If you're having trouble, attend a Q&A session or reach out on Slack for help.
-
 
 bookmarksRouter
 .route('/bookmarks')
@@ -75,7 +66,7 @@ bookmarksRouter
             logger.info(`Bookmark with id ${bookmark.id} created`)
             res
                 .status(201)
-                .location(`/bookmarks/${bookmark.id}`)
+                .location(path.posix.join(req.originalUrl +`/${bookmark.id}`))
                 .json({
                     id: bookmark.id,
                     title: xss(bookmark.title),
@@ -89,6 +80,23 @@ bookmarksRouter
 
 bookmarksRouter
 .route('/bookmarks/:id')
+.all((req, res, next) => {
+    const { id } = req.params
+    BookmarksService.getById(req.app.get('db'), id)
+      .then(bookmark => {
+        if (!bookmark) {
+          logger.error(`Bookmark with id ${id} not found.`)
+          return res.status(404).json({
+            error: { message: `Bookmark does not exist` }
+          })
+        }
+
+        res.bookmark = bookmark
+        next()
+      })
+      .catch(next)
+
+  })
 .get((req,res,next) => {
     const knexInstance = req.app.get('db')
     const id = req.params.id;
@@ -124,10 +132,51 @@ bookmarksRouter
                     error: { message: `Bookmark does not exist`}
                 })
             }
-            logger.error(`Bookmark with id ${bookmark.id} was deleted`)
+            logger.info(`Bookmark with id ${bookmark.id} was deleted`)
             res.status(204).end();
         })
         .catch(next)
+})
+.patch(bodyParser, (req,res,next) => {
+    const { title, url, description, rating } = req.body
+    const bookmarkToUpdate = { title, url, description, rating }
+
+    const numberOfValues = Object.values(bookmarkToUpdate).filter(Boolean).length
+    if (numberOfValues === 0){
+        return res.status(400).json({
+            error: {
+                message: `Request body must contain either 'title, 'url', or 'rating'`
+            }
+        })
+    }
+  
+    if (url && !isWebUri(url)) {
+        logger.error(`Invalid url ${url}`)
+        return res
+            .status(400).json({
+                error: { message: `'url' must be valid` }
+            })
+            
+    }
+
+    if (rating && !Number.isInteger(rating) || rating < 0 || rating > 5) {
+       logger.error(`Invalid rating of ${rating}`)
+        return res
+            .status(400).json({
+                error: { message: `'rating' must be a number between 0 and 5` }
+            })
+    }
+
+    BookmarksService.updateBookmark(
+        req.app.get('db'),
+        req.params.id,
+        bookmarkToUpdate
+    )
+        .then(numRowsAffected => {
+            res.status(204).end()    
+        })
+        .catch(next)
+    
 })
 
 module.exports = bookmarksRouter

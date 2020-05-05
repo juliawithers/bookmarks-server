@@ -675,3 +675,104 @@
 {"message":"Bookmark with id 123456 not found","level":"error"}
 {"message":"Bookmark with id undefined was deleted","level":"error"}
 {"message":"Bookmark with id undefined not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id undefined was deleted","level":"info"}
+{"message":"Bookmark with id undefined not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id undefined was deleted","level":"info"}
+{"message":"Bookmark with id undefined not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id undefined was deleted","level":"info"}
+{"message":"Bookmark with id undefined not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id undefined was deleted","level":"info"}
+{"message":"Bookmark with id undefined not found","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found","level":"error"}
+{"message":"Bookmark with id undefined was deleted","level":"info"}
+{"message":"Bookmark with id undefined not found","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/123456","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/123456","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/123456","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/123456","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/123456","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/2","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks/2","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Unauthorized request to path: /bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks","level":"error"}
+{"message":"Unauthorized request to path: /api/bookmarks","level":"error"}
+{"message":"Invalid rating of 5","level":"error"}
+{"message":"Invalid rating of 5","level":"error"}
+{"message":"Invalid rating of 5","level":"error"}
+{"message":"Invalid rating of 5","level":"error"}
+{"message":"Bookmark with id 5 created","level":"info"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Invalid url undefined","level":"error"}
+{"message":"Invalid url invalid.url","level":"error"}
+{"message":"Invalid url undefined","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Invalid url undefined","level":"error"}
+{"message":"Invalid url invalid.url","level":"error"}
+{"message":"Invalid url undefined","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Invalid url undefined","level":"error"}
+{"message":"Invalid url htp://invalid.url","level":"error"}
+{"message":"Invalid url undefined","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Invalid url htp://invalid.url","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 1 created","level":"info"}
+{"message":"title is required","level":"error"}
+{"message":"url is required","level":"error"}
+{"message":"rating is required","level":"error"}
+{"message":"Invalid url htps//www.newurl.com","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
+{"message":"Bookmark with id 123456 not found.","level":"error"}
+{"message":"Bookmark with id undefined was deleted","level":"info"}
+{"message":"Bookmark with id 123456 not found.","level":"error"}
+{"message":"Bookmark with id 123456789 not found.","level":"error"}
+{"message":"Invalid url htp://invalid.url","level":"error"}
+{"message":"Invalid rating of invalid","level":"error"}
